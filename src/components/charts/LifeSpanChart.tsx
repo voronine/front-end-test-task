@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import {
   LineChart,
   Line,
@@ -19,7 +19,7 @@ interface LifeSpanChartProps {
   data: LifeSpanData[];
 }
 
-const LifeSpanChart: React.FC<LifeSpanChartProps> = ({ data }) => {
+const LifeSpanChart: FC<LifeSpanChartProps> = ({ data }) => {
   return (
     <ResponsiveContainer>
       <LineChart data={data}>

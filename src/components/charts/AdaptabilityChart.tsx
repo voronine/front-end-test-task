@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import {
   BarChart,
   Bar,
@@ -14,7 +14,7 @@ interface AdaptabilityChartProps {
   data: { name: string; value: number }[];
 }
 
-const AdaptabilityChart: React.FC<AdaptabilityChartProps> = ({ data }) => {
+const AdaptabilityChart: FC<AdaptabilityChartProps> = ({ data }) => {
   return (
     <ResponsiveContainer>
       <BarChart data={data}>

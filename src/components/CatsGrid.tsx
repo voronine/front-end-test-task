@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { FC, useState } from "react";
 import { CatModel } from "../services/catsService";
 
 interface CatsGridProps {
@@ -7,7 +7,7 @@ interface CatsGridProps {
 
 const DESCRIPTION_THRESHOLD = 150;
 
-const CatsGrid: React.FC<CatsGridProps> = ({ catsData }) => {
+const CatsGrid: FC<CatsGridProps> = ({ catsData }) => {
   const [expandedIds, setExpandedIds] = useState<Record<string, boolean>>({});
 
   const toggleExpand = (id: string) => {

@@ -1,15 +1,15 @@
-import React from "react";
+import { FC, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useAppSelector } from "../store/store";
 import { useLogin } from "../hooks/useLogin";
 import LoginForm from "../components/LoginForm";
 
-const SignInPage: React.FC = () => {
+const SignInPage: FC = () => {
   const navigate = useNavigate();
   const { isAuthenticated, loading, error } = useAppSelector((state) => state.auth);
   const { login } = useLogin();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isAuthenticated) navigate("/");
   }, [isAuthenticated, navigate]);
 
@@ -24,7 +24,12 @@ const SignInPage: React.FC = () => {
           <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 text-center mb-6">
             Sign In
           </h1>
-          <LoginForm onSubmit={handleSubmit} error={error} loading={loading} />
+
+          <LoginForm 
+            onSubmit={handleSubmit} 
+            error={error} 
+            loading={loading} 
+          />
         </div>
       </div>
     </div>

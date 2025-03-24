@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import {
   BarChart,
   Bar,
@@ -14,7 +14,7 @@ interface AffectionChartProps {
   data: { name: string; value: number }[];
 }
 
-const AffectionChart: React.FC<AffectionChartProps> = ({ data }) => {
+const AffectionChart: FC<AffectionChartProps> = ({ data }) => {
   return (
     <ResponsiveContainer>
       <BarChart data={data}>

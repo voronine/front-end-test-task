@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import {
   PieChart,
   Pie,
@@ -18,7 +18,7 @@ interface LapChartProps {
   colors: string[];
 }
 
-const LapChart: React.FC<LapChartProps> = ({ data, colors }) => {
+const LapChart: FC<LapChartProps> = ({ data, colors }) => {
   return (
     <ResponsiveContainer>
       <PieChart>

@@ -1,8 +1,8 @@
-import React from "react";
+import { FC } from "react";
 import useDarkMode from "../hooks/useDarkMode";
 import classNames from "classnames";
 
-const DarkModeToggle: React.FC = () => {
+const DarkModeToggle: FC = () => {
   const { darkMode, toggle } = useDarkMode();
 
   return (

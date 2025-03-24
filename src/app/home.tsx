@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useAppSelector } from "../store/store";
 import { useGetBreedsQuery } from "../services/catsService";
@@ -23,7 +23,7 @@ const COLORS: string[] = [
   "#82ca9d",
 ];
 
-const HomePage: React.FC = () => {
+const HomePage: FC = () => {
   const navigate = useNavigate();
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const { data: catsData, isLoading, error } = useGetBreedsQuery();
@@ -57,7 +57,15 @@ const HomePage: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-blue-600 rounded-full" />
+        <div className="animate-spin
+                        inline-block 
+                        w-6 h-6 
+                        border-[3px] 
+                        border-current 
+                        border-t-transparent 
+                        text-blue-600 
+                        rounded-full" 
+          />
       </div>
     );
   }
@@ -88,18 +96,23 @@ const HomePage: React.FC = () => {
         <ChartCard title="Adaptability Distribution">
           <AdaptabilityChart data={adaptabilityData} />
         </ChartCard>
+
         <ChartCard title="Affection Levels">
           <AffectionChart data={affectionData} />
         </ChartCard>
+
         <ChartCard title="Origins (Number of Breeds)">
           <OriginsChart data={originData} colors={COLORS} />
         </ChartCard>
+
         <ChartCard title="Indoor vs Outdoor Preference">
           <IndoorOutdoorChart data={indoorData} colors={COLORS} />
         </ChartCard>
+
         <ChartCard title="Lap Cat Distribution">
           <LapChart data={lapData} colors={COLORS} />
         </ChartCard>
+
         <ChartCard title="Life Span Distribution">
           <LifeSpanChart data={lifeSpanData} />
         </ChartCard>

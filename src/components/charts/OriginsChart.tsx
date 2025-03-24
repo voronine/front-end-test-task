@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import {
   PieChart,
   Pie,
@@ -18,7 +18,7 @@ interface OriginsChartProps {
   colors: string[];
 }
 
-const OriginsChart: React.FC<OriginsChartProps> = ({ data, colors }) => {
+const OriginsChart: FC<OriginsChartProps> = ({ data, colors }) => {
   return (
     <ResponsiveContainer>
       <PieChart>
