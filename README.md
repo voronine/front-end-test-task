@@ -6,7 +6,7 @@ The project is deployed on Vercel. To deploy your project, follow these steps:
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/yourusername/your-repo.git
+   git clone https://github.com/voronine/front-end-test-task
    cd your-repo
 
 2. **Install Dependencies:**
