@@ -3,7 +3,7 @@ import { catsApi } from "../services/catsService";
 import authReducer from "./slices/authSlice";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 
-const customMiddleware: Middleware = (store) => (next) => (action) => {
+const customMiddleware: Middleware = () => (next) => (action) => {
   const result = next(action);
   return result;
 };
