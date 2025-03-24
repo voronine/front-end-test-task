@@ -1,0 +1,10 @@
+{
+    "extends": "./tsconfig.app.json",
+    "compilerOptions": {
+      "jsx": "react-jsx",
+      "noEmit": false,
+      "types": ["jest", "node", "@testing-library/jest-dom"]
+    },
+    "include": ["src", "__tests__"]
+  }
+  

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { validationSchema } from "../validation/loginValidation";
 
@@ -8,8 +8,11 @@ interface LoginFormProps {
   loading: boolean;
 }
 
-const LoginForm: FC<LoginFormProps> = ({ onSubmit, error, loading }) => {
-  const initialValues = { email: "", password: "" };
+const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, error, loading }) => {
+  const initialValues = {
+    email: "",
+    password: "",
+  };
 
   return (
     <Formik
@@ -96,7 +99,7 @@ const LoginForm: FC<LoginFormProps> = ({ onSubmit, error, loading }) => {
 
           <button
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || loading}
             className="
               w-full py-3 px-4 
               inline-flex justify-center items-center 
