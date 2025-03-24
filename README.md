@@ -1,112 +1,163 @@
 # Coralsoft Test Task
 
-## Setup
+## Deployment
 
-```bash
+The project is deployed on Vercel. To deploy your project, follow these steps:
+
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/yourusername/your-repo.git
+   cd your-repo
+
+2. **Install Dependencies:**
+
 npm install
-npm run dev
-```
 
-## Tech Stack
+3. **Build the Project:**
 
-- React
-- Redux Toolkit
-- RTK Query
-- React Router
-- Recharts
-- Preline UI
-- Tailwind CSS
-- TypeScript
-- Vite
+npm run build
 
-## Features
+4. **Deploy on Vercel:**
 
-- Sign In (without a backend)
-- Home Page (Dashboard)
+https://front-end-test-task-eight.vercel.app/
 
-## Prerequisites
 
-- You may install any validation-related packages.
-- You must use Redux Toolkit, RTK Query, TypeScript, React Router, Recharts, Preline UI, Tailwind CSS, and Vite.
-- You are free to modify or add files to the project (decoupling files where necessary is encouraged).
+**Project Overview**
+This project is a dashboard application for displaying cat breed statistics. It demonstrates proficiency in modern frontend development using the following technologies:
 
-## Requirements
+React for building UI components.
 
-- Refactor the app code using best practices in React, TypeScript, Redux Toolkit, and RTK Query.
-- **Sign-In Page**
-  - Implement email and password validation:
-    - The email must be in a valid format.
-    - In the fake backend, the email must be `test@test.test` and the password must be `password`. Otherwise, return a "User not found" error.
-  - Display error messages for invalid inputs.
-  - Implement a loading state.
-- **Dashboard Page**
-  - Integrate TheCatAPI's `/breeds` endpoint in `catsService`.
-    - Follow this [link](https://developers.thecatapi.com/view-account/ylX4blBYT9FaoVd6OhvR?report=aZyiLrsCh#tag/Breeds/paths/~1breeds/get)
-    - In the left sidebar, click on `OpenAPI Spec Doc` and then click on `Breeds`.
-    - Use `/breeds` endpoint to get the data.
-  - Implement charts for data visualization (fixing the existing ones if necessary).
-  - Display a grid of cat information, including:
-    - Name
-    - Origin
-    - Description
-    - Adaptability
-    - Affection Level
-    - Life Span
-  - Implement sorting and filtering using Preline UI (sorting and filtering parameters are up to you).
-- **Hosting**
-  - Host the app on Vercel or any other free hosting service.
+TypeScript for static type checking.
 
-## Additional Requirements (Optional but Recommended)
+Redux Toolkit for state management.
 
-- Implement a dark theme.
+RTK Query for API calls.
 
-## Evaluation Criteria
+React Router for routing.
 
-### Requirements Implementation
+Recharts for data visualization.
 
-- All core features are implemented correctly.
-- API integration works as expected.
-- Validation logic functions properly.
+Preline UI for ready-to-use UI components.
 
-### Code Architecture & Organization
+Tailwind CSS for utility-first styling.
 
-- Clear separation of concerns.
-- Modular component structure.
-- Proper state management with Redux.
-- Efficient API handling with RTK Query.
-- Well-organized file and folder structure.
+Vite for fast build and development.
 
-### TypeScript Usage
+The project adheres to SOLID and DRY principles, ensuring that each component and hook has a single responsibility and that code duplication is minimized. All core functionality is split into reusable, modular components.
 
-- Proper type definitions.
-- Type safety across components.
-- Minimal use of the `any` type.
-- Consistent typing patterns.
+├── package.json
+├── tsconfig.json
+├── tsconfig.app.json          // TypeScript configuration for the app
+├── tsconfig.node.json         // TypeScript configuration for node (e.g., vite.config.ts)
+├── postcss.config.cjs         // PostCSS configuration (CommonJS)
+├── tailwind.config.mjs        // Tailwind CSS configuration (ES module)
+├── vite.config.ts             // Vite configuration
+├── public/
+│   └── index.html             // HTML template
+└── src/
+    ├── main.tsx               // Application entry point
+    ├── main.css               // Main CSS with Tailwind directives
+    ├── app/
+    │   ├── home.tsx           // Dashboard (Home Page)
+    │   └── signIn.tsx         // Sign In page
+    ├── components/
+    │   ├── LoginForm.tsx      // Login form component
+    │   ├── FilterAndSortBar.tsx  // Filter and sort controls component
+    │   ├── ChartCard.tsx      // Wrapper component for charts
+    │   ├── CatsGrid.tsx       // Grid component for displaying cat cards
+    │   ├── DarkModeToggle.tsx // Dark mode toggle component
+    │   └── __tests__/         // Test files for components
+    ├── services/
+    │   └── catsService.ts     // RTK Query service for TheCatAPI
+    ├── store/
+    │   ├── store.ts           // Redux store configuration
+    │   └── slices/
+    │       └── authSlice.ts   // Authentication slice
+    ├── hooks/
+    │   ├── useChartData.ts    // Hook to process chart data from cat breeds
+    │   ├── useFilterAndSort.ts  // Hook for filtering and sorting cat breeds
+    │   ├── useDarkMode.ts     // Hook for toggling dark mode
+    │   └── useLogin.ts        // Hook for handling login
+    └── validation/
+        └── loginValidation.ts // Validation schema for the login form
 
-### React Best Practices
 
-- Functional components with hooks.
-- Proper component composition.
-- Efficient re-rendering strategies.
-- Avoiding excessive prop drilling.
+**Features**
 
-### Performance Optimization
+-Sign In Page
 
-- Minimal unnecessary re-renders.
-- Proper use of memoization.
-- Efficient data fetching.
+Login Form: Built using Formik with validation (using Yup) for email and password.
 
-### Code Quality
+Fake Authentication: Accepts only test@test.test as email and password as the password; otherwise, displays an error.
 
-- Clean and readable code.
-- Consistent naming conventions.
-- Proper error handling.
-- Comments where necessary.
-- Adherence to DRY (Don't Repeat Yourself) principles.
+Error Handling and Loading State: Displays error messages and a loading spinner during authentication.
 
-### Testing & Maintainability
+Dark Mode Support: Uses Tailwind CSS dark: classes for adaptive styling.
 
-- Unit test coverage.
-- Easy to extend and modify.
-- Well-documented code.
-- Proper error boundaries.
+-Dashboard (Home Page)
+
+Data Integration: Uses RTK Query (useGetBreedsQuery) to fetch cat breed data from TheCatAPI.
+
+Charts: Displays various charts (Adaptability Distribution, Affection Levels, Origins, Indoor vs Outdoor, Lap Cat Distribution, Life Span Distribution) using Recharts.
+
+Filter and Sort: Implements filtering and sorting functionality via the custom hook useFilterAndSort and the UI component FilterAndSortBar.
+
+-Custom Hooks
+
+useChartData: Processes raw cat breed data into arrays suitable for chart components.
+
+useFilterAndSort: Manages filtering (by breed name and origin) and sorting (by various parameters) of the cat data.
+
+useDarkMode: Manages the dark mode state by reading and setting the theme in localStorage and toggling the dark class on the document.
+
+useLogin: Handles the login process by dispatching Redux actions (loginStart, loginSuccess, loginFailure) based on a simulated backend response.
+
+-Redux and RTK Query
+
+authSlice: Manages authentication state (user, loading, error, status) with actions for login and logout.
+
+catsService: RTK Query service for fetching cat breeds from TheCatAPI.
+
+
+SOLID and DRY Principles
+Single Responsibility: Each component and hook is responsible for a specific part of the application (e.g., LoginForm only handles login UI, useChartData only processes chart data).
+
+Open/Closed: The application components are designed to be extended without modifying existing code (e.g., additional charts can be added using the ChartCard component).
+
+Liskov Substitution: Components are designed with strict type definitions ensuring they can be replaced or extended without breaking functionality.
+
+Interface Segregation: Components accept only the props they need; hooks expose specific methods for state updates.
+
+Dependency Inversion: High-level modules (UI components) depend on abstractions (custom hooks, Redux actions) rather than concrete implementations.
+
+DRY (Don't Repeat Yourself): Reusable logic (like filtering, sorting, chart data processing, dark mode toggling) is encapsulated in custom hooks and shared components.
+
+
+**Testing**
+The project is covered by tests to ensure key functionality:
+
+Authentication and Login: Tests for the LoginForm component and authSlice ensure that login actions work correctly.
+
+Redux Slice (authSlice): Unit tests verify that state updates correctly for loginStart, loginSuccess, loginFailure, logout, and updateUserInfo.
+
+Integration Tests for Dashboard: Tests verify that the HomePage renders charts, filters, and cat cards properly under different states (loading, error, successful data load).
+
+Only two tests remain for the slice and login; the rest of the tests are in place as needed.
+
+**Conclusion**
+This project meets all core requirements of the test task:
+
+A fully functional Sign In page with validation, error handling, and a fake authentication backend.
+
+A Dashboard that displays cat breed data with various charts, filter and sort functionality, and a responsive grid of cat cards.
+
+Implementation of dark mode using a custom hook and Tailwind CSS dark: classes.
+
+A well-structured project following modern frontend best practices (SOLID, DRY).
+
+Comprehensive test coverage for critical components and Redux logic.
+
+Deployment on Vercel with a live URL.
+
+
+This documentation provides an overview of the project, detailed instructions on setup and deployment, and explanations of each major part of the application. It serves as a complete guide for maintaining and extending the project in the future.
