@@ -11,6 +11,8 @@ import OriginsChart from "../components/charts/OriginsChart";
 import IndoorOutdoorChart from "../components/charts/IndoorOutdoorChart";
 import LapChart from "../components/charts/LapChart";
 import LifeSpanChart from "../components/charts/LifeSpanChart";
+import { useFilterAndSort } from "../hooks/useFilterAndSort";
+import FilterAndSortBar from "../components/FilterAndSortBar";
 
 const COLORS: string[] = [
   "#0088FE",
@@ -25,6 +27,18 @@ const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
   const { data: catsData, isLoading, error } = useGetBreedsQuery();
+
+  const {
+    filterText,
+    setFilterText,
+    selectedOrigin,
+    setSelectedOrigin,
+    sortParameter,
+    setSortParameter,
+    sortedCats,
+    uniqueOrigins,
+  } = useFilterAndSort(catsData);
+
   const {
     adaptabilityData,
     affectionData,
@@ -32,7 +46,7 @@ const HomePage: React.FC = () => {
     indoorData,
     lapData,
     lifeSpanData,
-  } = useChartData(catsData);
+  } = useChartData(sortedCats);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -60,33 +74,38 @@ const HomePage: React.FC = () => {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-8">Cat Breeds Statistics</h1>
 
+      <FilterAndSortBar
+        filterText={filterText}
+        setFilterText={setFilterText}
+        selectedOrigin={selectedOrigin}
+        setSelectedOrigin={setSelectedOrigin}
+        sortParameter={sortParameter}
+        setSortParameter={setSortParameter}
+        uniqueOrigins={uniqueOrigins}
+      />
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <ChartCard title="Adaptability Distribution">
           <AdaptabilityChart data={adaptabilityData} />
         </ChartCard>
-
         <ChartCard title="Affection Levels">
           <AffectionChart data={affectionData} />
         </ChartCard>
-
         <ChartCard title="Origins (Number of Breeds)">
           <OriginsChart data={originData} colors={COLORS} />
         </ChartCard>
-
         <ChartCard title="Indoor vs Outdoor Preference">
           <IndoorOutdoorChart data={indoorData} colors={COLORS} />
         </ChartCard>
-
         <ChartCard title="Lap Cat Distribution">
           <LapChart data={lapData} colors={COLORS} />
         </ChartCard>
-
         <ChartCard title="Life Span Distribution">
           <LifeSpanChart data={lifeSpanData} />
         </ChartCard>
       </div>
 
-      <CatsGrid catsData={catsData || []} />
+      <CatsGrid catsData={sortedCats} />
     </div>
   );
 };
