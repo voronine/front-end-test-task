@@ -18,10 +18,10 @@ const SignInPage: React.FC = () => {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center bg-gray-50">
+    <div className="min-h-screen w-full dark:bg-gray-900 flex items-center justify-center">
       <div className="w-full max-w-md">
-        <div className="bg-white shadow-md rounded-xl p-8">
-          <h1 className="text-2xl font-bold text-gray-800 text-center mb-6">
+        <div className="bg-white dark:bg-gray-800 shadow-md rounded-xl p-8">
+          <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 text-center mb-6">
             Sign In
           </h1>
           <LoginForm onSubmit={handleSubmit} error={error} loading={loading} />

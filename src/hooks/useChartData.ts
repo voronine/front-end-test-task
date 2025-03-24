@@ -28,9 +28,6 @@ const useChartData = (catsData: CatModel[] | undefined): ChartDataReturn => {
   const [lapData, setLapData] = useState<ChartData[]>([]);
   const [lifeSpanData, setLifeSpanData] = useState<LifeSpanData[]>([]);
 
-  console.log(catsData);
-  
-
   useEffect(() => {
     if (!catsData || catsData.length === 0) return;
     setAdaptabilityData(

@@ -26,12 +26,12 @@ const FilterAndSortBar: React.FC<FilterAndSortBarProps> = ({
       <input
         type="text"
         placeholder="Search by breed name..."
-        className="form-input px-3 py-2 rounded border border-gray-300 focus:outline-none focus:ring focus:border-blue-500"
+        className="form-input px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring focus:border-blue-500"
         value={filterText}
         onChange={(e) => setFilterText(e.target.value)}
       />
       <select
-        className="form-select px-3 py-2 rounded border border-gray-300 focus:outline-none focus:ring focus:border-blue-500"
+        className="form-select px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring focus:border-blue-500"
         value={selectedOrigin}
         onChange={(e) => setSelectedOrigin(e.target.value)}
       >
@@ -43,11 +43,9 @@ const FilterAndSortBar: React.FC<FilterAndSortBarProps> = ({
         ))}
       </select>
       <select
-        className="form-select px-3 py-2 rounded border border-gray-300 focus:outline-none focus:ring focus:border-blue-500"
+        className="form-select px-3 py-2 rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring focus:border-blue-500"
         value={sortParameter}
-        onChange={(e) =>
-          setSortParameter(e.target.value as SortParameter)
-        }
+        onChange={(e) => setSortParameter(e.target.value as SortParameter)}
       >
         <option value="name">Sort by Name</option>
         <option value="origin">Sort by Origin</option>
