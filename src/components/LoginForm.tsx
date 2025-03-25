@@ -22,7 +22,6 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(
         onSubmit={onSubmit}
       >
         {({ isSubmitting }) => (
-          // Adding relative so that the absolute error message is positioned correctly.
           <Form className="relative">
             <div className="mb-6">
               <label
