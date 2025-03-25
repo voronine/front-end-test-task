@@ -64,7 +64,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, error, loading }) => {
               <ErrorMessage name="password" />
             </div>
 
-            {/* Абсолютное позиционирование: по центру и чуть выше */}
             {error && (
               <p className="absolute left-1/2 top-full transform -translate-x-1/2 -translate-y-2 text-red-500 text-xs">
                 {error}
