@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { CatModel } from "../services/catsService";
 
 export interface ChartData {
@@ -14,46 +14,45 @@ export interface LifeSpanData {
 interface ChartDataReturn {
   adaptabilityData: ChartData[];
   affectionData: ChartData[];
-  originData: ChartData[]; 
-  indoorData: ChartData[]; 
-  lapData: ChartData[];   
+  originData: ChartData[];
+  indoorData: ChartData[];
+  lapData: ChartData[];
   lifeSpanData: LifeSpanData[];
 }
 
 const useChartData = (catsData: CatModel[] | undefined): ChartDataReturn => {
-  const [adaptabilityData, setAdaptabilityData] = useState<ChartData[]>([]);
-  const [affectionData, setAffectionData] = useState<ChartData[]>([]);
-  const [originData, setOriginData] = useState<ChartData[]>([]);
-  const [indoorData, setIndoorData] = useState<ChartData[]>([]);
-  const [lapData, setLapData] = useState<ChartData[]>([]);
-  const [lifeSpanData, setLifeSpanData] = useState<LifeSpanData[]>([]);
+  const memoizedData = useMemo(() => {
+    if (!catsData || catsData.length === 0) {
+      return {
+        adaptabilityData: [],
+        affectionData: [],
+        originData: [],
+        indoorData: [],
+        lapData: [],
+        lifeSpanData: [],
+      };
+    }
 
-  useEffect(() => {
-    if (!catsData || catsData.length === 0) return;
-    setAdaptabilityData(
-      catsData.map((cat) => ({
-        name: cat.name,
-        value: cat.adaptability,
-      }))
-    );
+    const adaptabilityData = catsData.map((cat) => ({
+      name: cat.name,
+      value: cat.adaptability,
+    }));
 
-    setAffectionData(
-      catsData.map((cat) => ({
-        name: cat.name,
-        value: cat.affection_level,
-      }))
-    );
+    const affectionData = catsData.map((cat) => ({
+      name: cat.name,
+      value: cat.affection_level,
+    }));
 
     const originMap = catsData.reduce<Record<string, number>>((acc, cat) => {
       const origin = cat.origin || "Unknown";
       acc[origin] = (acc[origin] || 0) + 1;
       return acc;
     }, {});
-    const groupedOrigins = Object.entries(originMap).map(([country, count]) => ({
+
+    const originData = Object.entries(originMap).map(([country, count]) => ({
       name: country,
       value: count,
     }));
-    setOriginData(groupedOrigins);
 
     const indoorCount = catsData.reduce<{ indoor: number; outdoor: number }>(
       (acc, cat) => {
@@ -63,10 +62,11 @@ const useChartData = (catsData: CatModel[] | undefined): ChartDataReturn => {
       },
       { indoor: 0, outdoor: 0 }
     );
-    setIndoorData([
+
+    const indoorData = [
       { name: "Indoor", value: indoorCount.indoor },
       { name: "Outdoor", value: indoorCount.outdoor },
-    ]);
+    ];
 
     const lapCount = catsData.reduce<{ lap: number; notLap: number }>(
       (acc, cat) => {
@@ -76,31 +76,28 @@ const useChartData = (catsData: CatModel[] | undefined): ChartDataReturn => {
       },
       { lap: 0, notLap: 0 }
     );
-    setLapData([
+
+    const lapData = [
       { name: "Lap Cat", value: lapCount.lap },
       { name: "Not Lap Cat", value: lapCount.notLap },
-    ]);
+    ];
 
-    setLifeSpanData(
-      catsData.map((cat) => {
-        const spanString = cat.life_span;
-        const firstNumber = parseInt(spanString.split(" ")[0]) || 0;
-        return {
-          name: cat.name,
-          years: firstNumber,
-        };
-      })
-    );
+    const lifeSpanData = catsData.map((cat) => ({
+      name: cat.name,
+      years: parseInt(cat.life_span.split(" ")[0]) || 0,
+    }));
+
+    return {
+      adaptabilityData,
+      affectionData,
+      originData,
+      indoorData,
+      lapData,
+      lifeSpanData,
+    };
   }, [catsData]);
 
-  return {
-    adaptabilityData,
-    affectionData,
-    originData,
-    indoorData,
-    lapData,
-    lifeSpanData,
-  };
+  return memoizedData;
 };
 
 export default useChartData;

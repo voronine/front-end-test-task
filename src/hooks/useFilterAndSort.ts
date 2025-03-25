@@ -1,7 +1,12 @@
-import { useState, useMemo } from "react";
+import { useMemo, useState } from "react";
 import { CatModel } from "../services/catsService";
 
-type SortParameter = "name" | "origin" | "adaptability" | "affection_level" | "life_span";
+type SortParameter =
+  | "name"
+  | "origin"
+  | "adaptability"
+  | "affection_level"
+  | "life_span";
 
 interface UseFilterAndSortReturn {
   filterText: string;
@@ -14,20 +19,26 @@ interface UseFilterAndSortReturn {
   uniqueOrigins: string[];
 }
 
-export function useFilterAndSort(catsData: CatModel[] | undefined): UseFilterAndSortReturn {
+export function useFilterAndSort(
+  catsData: CatModel[] | undefined
+): UseFilterAndSortReturn {
   const [filterText, setFilterText] = useState<string>("");
   const [selectedOrigin, setSelectedOrigin] = useState<string>("All");
   const [sortParameter, setSortParameter] = useState<SortParameter>("name");
 
   const uniqueOrigins = useMemo(() => {
     if (!catsData) return [];
-    return Array.from(new Set(catsData.map((cat) => cat.origin || "Unknown")));
+    return Array.from(
+      new Set(catsData.map((cat) => cat.origin || "Unknown"))
+    );
   }, [catsData]);
 
   const filteredCats = useMemo(() => {
     if (!catsData) return [];
     return catsData.filter((cat) => {
-      const matchesName = cat.name.toLowerCase().includes(filterText.toLowerCase());
+      const matchesName = cat.name
+        .toLowerCase()
+        .includes(filterText.toLowerCase());
       const origin = cat.origin || "Unknown";
       const matchesOrigin = selectedOrigin === "All" || origin === selectedOrigin;
       return matchesName && matchesOrigin;
@@ -46,7 +57,10 @@ export function useFilterAndSort(catsData: CatModel[] | undefined): UseFilterAnd
         if (typeof aVal === "number" && typeof bVal === "number") {
           return aVal - bVal;
         }
-        return aVal.toString().toLowerCase().localeCompare(bVal.toString().toLowerCase());
+        return aVal
+          .toString()
+          .toLowerCase()
+          .localeCompare(bVal.toString().toLowerCase());
       }
     });
   }, [filteredCats, sortParameter]);
