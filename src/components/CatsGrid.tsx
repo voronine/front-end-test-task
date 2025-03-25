@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import React, { FC, useState, useCallback } from "react";
 import { CatModel } from "../services/catsService";
 
 interface CatsGridProps {
@@ -7,15 +7,15 @@ interface CatsGridProps {
 
 const DESCRIPTION_THRESHOLD = 150;
 
-const CatsGrid: FC<CatsGridProps> = ({ catsData }) => {
+const CatsGrid: FC<CatsGridProps> = React.memo(({ catsData }) => {
   const [expandedIds, setExpandedIds] = useState<Record<string, boolean>>({});
 
-  const toggleExpand = (id: string) => {
+  const toggleExpand = useCallback((id: string) => {
     setExpandedIds((prev) => ({
       ...prev,
       [id]: !prev[id],
     }));
-  };
+  }, []);
 
   return (
     <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -24,7 +24,15 @@ const CatsGrid: FC<CatsGridProps> = ({ catsData }) => {
         return (
           <div
             key={cat.id}
-            className="group flex flex-col h-full bg-white border border-gray-200 shadow-sm rounded-xl"
+            className="group 
+              flex flex-col 
+              h-full 
+              bg-white 
+              border border-gray-200 
+              shadow-sm 
+              rounded-xl 
+              transition-transform 
+              hover:scale-[1.02]"
           >
             <div className="p-4 md:p-6">
               <h3 className="text-xl font-semibold text-gray-800 mb-2">
@@ -33,17 +41,22 @@ const CatsGrid: FC<CatsGridProps> = ({ catsData }) => {
               <span className="block mb-1 text-xs font-semibold uppercase text-blue-600">
                 Origin: {cat.origin || "Unknown"}
               </span>
-              <p className={`mt-3 text-gray-500 ${isExpanded ? "" : "line-clamp-3"}`}>
+              <p
+                className={`mt-3 text-gray-500 ${
+                  isExpanded ? "" : "line-clamp-3"
+                }`}
+              >
                 {cat.description || "No description available"}
               </p>
-              {cat.description && cat.description.length > DESCRIPTION_THRESHOLD && (
-                <button
-                  onClick={() => toggleExpand(cat.id)}
-                  className="mt-2 text-blue-500 hover:underline cursor-pointer"
-                >
-                  {isExpanded ? "Less..." : "More..."}
-                </button>
-              )}
+              {cat.description &&
+                cat.description.length > DESCRIPTION_THRESHOLD && (
+                  <button
+                    onClick={() => toggleExpand(cat.id)}
+                    className="mt-2 text-blue-500 hover:underline cursor-pointer"
+                  >
+                    {isExpanded ? "Less..." : "More..."}
+                  </button>
+                )}
               <div className="mt-4 space-y-2">
                 <div className="flex justify-between">
                   <span>Adaptability:</span>
@@ -64,6 +77,6 @@ const CatsGrid: FC<CatsGridProps> = ({ catsData }) => {
       })}
     </div>
   );
-};
+});
 
 export default CatsGrid;

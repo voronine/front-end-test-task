@@ -1,16 +1,19 @@
-import { FC, useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { useAppSelector } from "../store/store";
 import { useGetBreedsQuery } from "../services/catsService";
+
 import ChartCard from "../components/ChartCard";
 import CatsGrid from "../components/CatsGrid";
 import useChartData from "../hooks/useChartData";
+
 import AdaptabilityChart from "../components/charts/AdaptabilityChart";
 import AffectionChart from "../components/charts/AffectionChart";
 import OriginsChart from "../components/charts/OriginsChart";
 import IndoorOutdoorChart from "../components/charts/IndoorOutdoorChart";
 import LapChart from "../components/charts/LapChart";
 import LifeSpanChart from "../components/charts/LifeSpanChart";
+
 import { useFilterAndSort } from "../hooks/useFilterAndSort";
 import FilterAndSortBar from "../components/FilterAndSortBar";
 
@@ -23,9 +26,12 @@ const COLORS: string[] = [
   "#82ca9d",
 ];
 
-const HomePage: FC = () => {
+const HomePage: FC = React.memo(() => {
   const navigate = useNavigate();
-  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const isAuthenticated = useAppSelector(
+    (state) => state.auth.isAuthenticated
+  );
+
   const { data: catsData, isLoading, error } = useGetBreedsQuery();
 
   const {
@@ -57,15 +63,16 @@ const HomePage: FC = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="animate-spin
-                        inline-block 
-                        w-6 h-6 
-                        border-[3px] 
-                        border-current 
-                        border-t-transparent 
-                        text-blue-600 
-                        rounded-full" 
-          />
+        <div
+          className="animate-spin 
+            inline-block 
+            w-6 h-6 
+            border-[3px] 
+            border-current 
+            border-t-transparent 
+            text-blue-600 
+            rounded-full"
+        />
       </div>
     );
   }
@@ -79,7 +86,7 @@ const HomePage: FC = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 animate-fade-in transition-opacity duration-500">
       <h1 className="text-4xl font-bold mb-8">Cat Breeds Statistics</h1>
 
       <FilterAndSortBar
@@ -121,6 +128,6 @@ const HomePage: FC = () => {
       <CatsGrid catsData={sortedCats} />
     </div>
   );
-};
+});
 
 export default HomePage;
