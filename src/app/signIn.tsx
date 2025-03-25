@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../store/store";
 import { useLogin } from "../hooks/useLogin";
 import LoginForm from "../components/LoginForm";
