@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./app/home";
 import SignInPage from "./app/signIn";
 import StoreProvider from "./components/StoreProvider";
@@ -15,25 +15,25 @@ const App: React.FC = () => {
     <StoreProvider>
       <BrowserRouter>
         <UIProvider>
-            <DarkModeToggle />
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <PageWrapper>
-                    <HomePage />
-                  </PageWrapper>
-                }
-              />
-              <Route
-                path="/sign-in"
-                element={
-                  <PageWrapper>
-                    <SignInPage />
-                  </PageWrapper>
-                }
-              />
-            </Routes>
+          <DarkModeToggle />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <PageWrapper>
+                  <HomePage />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/sign-in"
+              element={
+                <PageWrapper>
+                  <SignInPage />
+                </PageWrapper>
+              }
+            />
+          </Routes>
         </UIProvider>
       </BrowserRouter>
     </StoreProvider>
