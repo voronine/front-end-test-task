@@ -22,9 +22,13 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(
         onSubmit={onSubmit}
       >
         {({ isSubmitting }) => (
-          <Form>
+          // Adding relative so that the absolute error message is positioned correctly.
+          <Form className="relative">
             <div className="mb-6">
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium mb-2"
+              >
                 Email address
               </label>
               <Field
@@ -45,7 +49,10 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(
             </div>
 
             <div className="mb-6 relative">
-              <label htmlFor="password" className="block text-sm font-medium mb-2">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium mb-2"
+              >
                 Password
               </label>
               <Field
@@ -65,8 +72,11 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(
               </div>
             </div>
 
+            {/* Absolutely positioned error message */}
             {error && (
-              <p className="text-red-500 text-center mb-4">{error}</p>
+              <p className="absolute left-1/2 top-0 transform -translate-y-full -translate-x-1/2 text-red-500 text-xs">
+                {error}
+              </p>
             )}
 
             <button
