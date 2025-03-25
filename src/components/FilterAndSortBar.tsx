@@ -17,6 +17,14 @@ interface FilterAndSortBarProps {
   uniqueOrigins: string[];
 }
 
+const sortOptions: { value: SortParameter; label: string }[] = [
+  { value: "name", label: "Sort by Name" },
+  { value: "origin", label: "Sort by Origin" },
+  { value: "adaptability", label: "Sort by Adaptability" },
+  { value: "affection_level", label: "Sort by Affection Level" },
+  { value: "life_span", label: "Sort by Life Span" },
+];
+
 const FilterAndSortBar: FC<FilterAndSortBarProps> = React.memo(
   ({
     filterText,
@@ -63,13 +71,15 @@ const FilterAndSortBar: FC<FilterAndSortBarProps> = React.memo(
             bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 
             focus:outline-none focus:ring focus:border-blue-500"
           value={sortParameter}
-          onChange={(e) => setSortParameter(e.target.value as SortParameter)}
+          onChange={(e) =>
+            setSortParameter(e.target.value as SortParameter)
+          }
         >
-          <option value="name">Sort by Name</option>
-          <option value="origin">Sort by Origin</option>
-          <option value="adaptability">Sort by Adaptability</option>
-          <option value="affection_level">Sort by Affection Level</option>
-          <option value="life_span">Sort by Life Span</option>
+          {sortOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
         </select>
       </div>
     );

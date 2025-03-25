@@ -71,7 +71,6 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(
               </div>
             </div>
 
-            {/* Absolutely positioned error message */}
             {error && (
               <p className="absolute left-1/2 top-0 transform -translate-y-full -translate-x-1/2 text-red-500 text-xs">
                 {error}
