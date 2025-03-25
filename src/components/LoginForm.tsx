@@ -24,10 +24,7 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(
         {({ isSubmitting }) => (
           <Form>
             <div className="mb-6">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium mb-2"
-              >
+              <label htmlFor="email" className="block text-sm font-medium mb-2">
                 Email address
               </label>
               <Field
@@ -48,10 +45,7 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(
             </div>
 
             <div className="mb-6 relative">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium mb-2"
-              >
+              <label htmlFor="password" className="block text-sm font-medium mb-2">
                 Password
               </label>
               <Field
@@ -69,27 +63,46 @@ const LoginForm: React.FC<LoginFormProps> = React.memo(
               <div className="h-5 mt-1 text-xs text-red-500">
                 <ErrorMessage name="password" />
               </div>
-
-              {error && (
-                <p className="text-red-500 text-xs">{error}</p>
-              )}
-              {loading && (
-                <div className="animate-spin h-5 w-5 text-blue-500" />
-              )}
             </div>
+
+            {error && (
+              <p className="text-red-500 text-center mb-4">{error}</p>
+            )}
 
             <button
               type="submit"
               disabled={isSubmitting || loading}
               className="
                 w-full py-3 px-4 
-                rounded-lg border 
+                inline-flex justify-center items-center 
+                gap-x-2 text-sm font-semibold 
+                rounded-lg border border-transparent 
                 bg-blue-600 text-white 
                 hover:bg-blue-700 
                 disabled:opacity-50 disabled:pointer-events-none
                 transition duration-300
               "
             >
+              {loading && (
+                <svg
+                  className="animate-spin h-5 w-5 text-white mr-2"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                  />
+                </svg>
+              )}
               Sign in
             </button>
           </Form>
