@@ -6,14 +6,12 @@ import LoginForm from "../components/LoginForm";
 
 const SignInPage: FC = React.memo(() => {
   const navigate = useNavigate();
-  const { isAuthenticated, loading, error } = useAppSelector(
-    (state) => state.auth
-  );
+  const { isAuthenticated, loading, error } = useAppSelector((state) => state.auth);
   const { login } = useLogin();
 
   useEffect(() => {
-    if (isAuthenticated) navigate("/");
-  }, [isAuthenticated, navigate]);
+    if (!loading && isAuthenticated) navigate("/");
+  }, [isAuthenticated, loading, navigate]);
 
   const handleSubmit = useCallback(
     async (values: { email: string; password: string }) => {
@@ -21,6 +19,8 @@ const SignInPage: FC = React.memo(() => {
     },
     [login]
   );
+
+  if (loading) return null;
 
   return (
     <div className="min-h-screen w-full dark:bg-gray-900 flex items-center justify-center">
