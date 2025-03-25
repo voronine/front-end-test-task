@@ -20,6 +20,9 @@ npm run build
 
 https://front-end-test-task-eight.vercel.app/
 
+login: test@test.test
+password: password
+
 
 **Project Overview**
 This project is a dashboard application for displaying cat breed statistics. It demonstrates proficiency in modern frontend development using the following technologies:
