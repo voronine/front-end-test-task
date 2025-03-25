@@ -39,7 +39,7 @@ const OriginsChart: FC<OriginsChartProps> = ({ data, colors }) => {
         </Pie>
         <Tooltip />
         <Legend
-          wrapperStyle={{ fontSize: "12px" }}
+          wrapperStyle={{ fontSize: "11px" }}
           formatter={(value, entry) => {
             const val = entry?.payload?.value;
             return val !== undefined ? `${value} (${val})` : value;
