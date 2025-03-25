@@ -43,7 +43,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, error, loading }) => {
             </div>
           </div>
 
-          {/* Контейнер для поля пароля и сообщений */}
           <div className="mb-6 relative">
             <label htmlFor="password" className="block text-sm font-medium mb-2">
               Password
